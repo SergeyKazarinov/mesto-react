@@ -1,38 +1,8 @@
-import logo from './images/Logo.svg';
+
 
 function App() {
   return (
-    <div className="page">
-      <header className="header">
-        <img className="header__logo" src={logo} alt="Логотип" />
-      </header>
-      <main className="containt">
-        <section className="profile">
-          <div className="profile__space-between">
-            <div className="profile__avatar-container">
-              <button className="button button_type_avatar" type="button" aria-label="Изменить аватар" name="avatar-button"></button>
-              <img className="profile__avatar" src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg" alt="Аватар" />
-            </div>
-            <div className="profile__info">
-              <div className="profile__flex-name">
-                <h1 className="profile__name">Жак-Ив Кусто</h1>
-                <button className="button button_type_edit" type="button" aria-label="Редактировать имя и информацию" name="edit-button"></button>
-              </div>
-                <span className="profile__job">Исследователь океана</span>
-            </div>
-          </div>
-          <button className="button button_type_add" type="button" aria-label="Добавить изображение" name="add-button"></button>
-        </section>
-        <section className="elements">
-          <ul className="elements__grid list">
-            
-          </ul>
-        </section>
-      </main>
-      <footer className="footer">
-        <p className="footer__copyright">&#169; 2022. Mesto Russia</p>
-      </footer>
-      
+    <div>
       <div className="popup popup_type_edit-profile">
           <div className="popup__container">
             <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
@@ -102,7 +72,7 @@ function App() {
             <button className="button button_type_save" value="Создать" id="button-add">Создать</button>
           </form>
         </div>
-    </div>
+      </div>
 
       <div className="popup popup_type_image-zoom">
         <div className="popup__container-image">
