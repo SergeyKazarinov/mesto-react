@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="./images/Logo.svg" alt="Логотип">
+  </header>
+  <main class="containt">
+    <section class="profile">
+      <div class="profile__space-between">
+        <div class="profile__avatar-container">
+          <button class="button button_type_avatar" type="button" aria-label="Изменить аватар" name="avatar-button"></button>
+          <img class="profile__avatar" src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg" alt="Аватар">
+        </div>
+        <div class="profile__info">
+          <div class="profile__flex-name">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="button button_type_edit" type="button" aria-label="Редактировать имя и информацию" name="edit-button"></button>
+          </div>
+            <span class="profile__job">Исследователь океана</span>
+        </div>
+      </div>
+      <button class="button button_type_add" type="button" aria-label="Добавить изображение" name="add-button"></button>
+    </section>
+    <section class="elements">
+      <ul class="elements__grid list">
+        
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&#169; 2022. Mesto Russia</p>
+  </footer>
+  
+  <div class="popup popup_type_edit-profile">
+      <div class="popup__container">
+        <button type="button" class="button button_type_close" aria-label="Закрыть окно"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="form" name="profile-edit" novalidate>
+          <fieldset class="form__set">
+            <input
+              type="text"
+              class="form__input form__input_type_name"
+              placeholder="Ваше имя"
+              value=""
+              id="input-title"
+              minlength="2"
+              maxlength="40"
+              required>
+            <span class="form__input-error input-title-error"></span>
+          </fieldset>
+
+          <fieldset class="form__set">
+            <input
+              type="text"
+              class="form__input form__input_type_job"
+              placeholder="Информация о работе"
+              value=""
+              id="input-job"
+              minlength="2"
+              maxlength="200"
+              required>
+            <span class="form__input-error input-job-error"></span>
+          </fieldset>
+          <button class="button button_type_save" value="Сохранить" id="button-save">Сохранить</button>
+        </form>
+      </div>
+  </div>
+
+  <div class="popup popup_type_add-image">
+    <div class="popup__container">
+      <button type="button" class="button button_type_close" aria-label="Закрыть окно"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="form" name="add-image" novalidate>
+        <fieldset class="form__set">
+          <input 
+            type="text"
+            class="form__input form__input_type_place"
+            placeholder="Название"
+            value=""
+            id="input-name"
+            minlength="2"
+            maxlength="30"
+            required>
+          <span class="form__input-error input-name-error"></span>
+        </fieldset>
+
+        <fieldset class="form__set">
+          <input
+            type="url"
+            class="form__input form__input_type_link"
+            placeholder="Ссылка на картинку"
+            value=""
+            id="input-link"
+            required>
+          <span class="form__input-error input-link-error"></span>
+        </fieldset>
+        <button class="button button_type_save" value="Создать" id="button-add">Создать</button>
+      </form>
+    </div>
+</div>
+
+  <div class="popup popup_type_image-zoom">
+    <div class="popup__container-image">
+      <button type="button" class="button button_type_close" aria-label="Закрыть окно"></button>
+      <img class="popup__image" src="./images/Image1.jpg" alt="">
+      <h2 class="popup__text"></h2>
+    </div>
+  </div>
+
+
+  <div class="popup popup_type_delete">
+    <div class="popup__container">
+      <button type="button" class="button button_type_close" aria-label="Закрыть окно"></button>
+      <h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
+      <button class="button button_type_save button_type_delete" type="button" value="Удалить" id="button-delete">Да</button>
+    </div>
+  </div>
+
+  <div class="popup popup_type_avatar">
+    <div class="popup__container">
+      <button type="button" class="button button_type_close" aria-label="Закрыть окно"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="form" name="avatar" novalidate>
+        <fieldset class="form__set">
+          <input
+            type="url"
+            class="form__input form__input_type_link"
+            placeholder="Ссылка на картинку"
+            value=""
+            id="input-avatar"
+            required>
+          <span class="form__input-error input-avatar-error"></span>
+        </fieldset>
+        <button class="button button_type_save" value="Сохранить" id="button-avatar">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <template id="cards">
+    <li class="card">
+      <button class="button button_type_card" type="button" name="card-image">
+      <img class="card__image" src="./images/Image1.jpg" alt=""></button>
+      <button class="button button_type_remove" type="button" aria-label="Удалить картинку" name="remove-image"></button>
+      <div class="card__item">
+        <h2 class="card__text"></h2>
+        <div class="card__like">
+          <button class="button button_type_like" type="button" aria-label="Поставить лайк" name="like"></button>
+          <span class="card__like-item"></span>
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <!-- <script type="module" src="./scripts/index.js"></script> -->
+</body>
+</html>
