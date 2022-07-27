@@ -2,40 +2,40 @@ function App() {
   return (
     <div>
       <div className="popup popup_type_edit-profile">
-          <div className="popup__container">
-            <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
-            <h2 className="popup__title">Редактировать профиль</h2>
-            <form className="form" name="profile-edit" novalidate>
-              <fieldset className="form__set">
-                <input
-                  type="text"
-                  className="form__input form__input_type_name"
-                  placeholder="Ваше имя"
-                  value=""
-                  id="input-title"
-                  minlength="2"
-                  maxlength="40"
-                  required
-                  />
-                <span className="form__input-error input-title-error"></span>
-              </fieldset>
+        <div className="popup__container">
+          <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
+          <h2 className="popup__title">Редактировать профиль</h2>
+          <form className="form" name="profile-edit" novalidate>
+            <fieldset className="form__set">
+              <input
+                type="text"
+                className="form__input form__input_type_name"
+                placeholder="Ваше имя"
+                value=""
+                id="input-title"
+                minlength="2"
+                maxlength="40"
+                required
+                />
+              <span className="form__input-error input-title-error"></span>
+            </fieldset>
 
-              <fieldset className="form__set">
-                <input
-                  type="text"
-                  className="form__input form__input_type_job"
-                  placeholder="Информация о работе"
-                  value=""
-                  id="input-job"
-                  minlength="2"
-                  maxlength="200"
-                  required
-                  />
-                <span className="form__input-error input-job-error"></span>
-              </fieldset>
-              <button className="button button_type_save" value="Сохранить" id="button-save">Сохранить</button>
-            </form>
-          </div>
+            <fieldset className="form__set">
+              <input
+                type="text"
+                className="form__input form__input_type_job"
+                placeholder="Информация о работе"
+                value=""
+                id="input-job"
+                minlength="2"
+                maxlength="200"
+                required
+                />
+              <span className="form__input-error input-job-error"></span>
+            </fieldset>
+            <button className="button button_type_save" value="Сохранить" id="button-save">Сохранить</button>
+          </form>
+        </div>
       </div>
 
       <div className="popup popup_type_add-image">
@@ -71,15 +71,6 @@ function App() {
           </form>
         </div>
       </div>
-
-      <div className="popup popup_type_image-zoom">
-        <div className="popup__container-image">
-          <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
-          <img className="popup__image" src="./images/Image1.jpg" alt="" />
-          <h2 className="popup__text"></h2>
-        </div>
-      </div>
-
 
       <div className="popup popup_type_delete">
         <div className="popup__container">
