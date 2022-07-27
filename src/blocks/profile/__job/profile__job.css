@@ -1,0 +1,35 @@
+.profile__job {
+  max-width: calc(100vw - 300px - 400px - 30px); 
+                /* width - два размера ячеек flex - padding - margin-right */
+  font-size: 18px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+@media screen and (min-width: 1280px) {
+  .profile__job {
+    max-width: calc(1080px - 300px - 200px - 30px); 
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .profile__job {
+    max-width: calc(100vw - 300px - 200px - 30px); 
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .profile__job {
+    max-width: calc(100vw - 300px - 100px - 30px); 
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .profile__job {
+    max-width: calc(100vw - 38px);
+    text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
