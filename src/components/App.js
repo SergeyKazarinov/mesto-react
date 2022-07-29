@@ -1,105 +1,122 @@
+import React, {useState} from "react";
+import Footer from "./Footer";
+import Header from "./Header";
+import ImagePopup from "./ImagePopup";
+import Main from "./Main";
+import PopupWithForm from "./PopupWithForm";
+
 function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
+  
   return (
-    <div>
-      <div className="popup popup_type_edit-profile">
-        <div className="popup__container">
-          <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <form className="form" name="profile-edit" novalidate>
-            <fieldset className="form__set">
-              <input
-                type="text"
-                className="form__input form__input_type_name"
-                placeholder="Ваше имя"
-                value=""
-                id="input-title"
-                minlength="2"
-                maxlength="40"
-                required
-                />
-              <span className="form__input-error input-title-error"></span>
-            </fieldset>
+    <div className="page">
+      <Header />
+      <Main 
+        onEditProfile={() => setIsEditProfilePopupOpen(true)} 
+        onAddPlace={() => setIsAddPlacePopupOpen(true)} 
+        onEditAvatar={() => setIsEditAvatarPopupOpen(true)}
+      />
+      <Footer />
+      <PopupWithForm 
+        name="edit-profile" 
+        title="Редактировать профиль" 
+        titleBtn="Сохранить" 
+        isOpen={isEditProfilePopupOpen}
+        onClose={() => setIsEditProfilePopupOpen(false)}
+      >
+      <fieldset class="form__set">
+        <input
+          type="text"
+          class="form__input form__input_type_name"
+          placeholder="Ваше имя"
+          value=""
+          id="input-title"
+          minlength="2"
+          maxlength="40"
+          required
+          />
+        <span class="form__input-error input-title-error"></span>
+      </fieldset>
 
-            <fieldset className="form__set">
-              <input
-                type="text"
-                className="form__input form__input_type_job"
-                placeholder="Информация о работе"
-                value=""
-                id="input-job"
-                minlength="2"
-                maxlength="200"
-                required
-                />
-              <span className="form__input-error input-job-error"></span>
-            </fieldset>
-            <button className="button button_type_save" value="Сохранить" id="button-save">Сохранить</button>
-          </form>
-        </div>
-      </div>
+      <fieldset class="form__set">
+        <input
+          type="text"
+          class="form__input form__input_type_job"
+          placeholder="Информация о работе"
+          value=""
+          id="input-job"
+          minlength="2"
+          maxlength="200"
+          required
+          />
+        <span class="form__input-error input-job-error"></span>
+      </fieldset>
+    </PopupWithForm>
 
-      <div className="popup popup_type_add-image">
-        <div className="popup__container">
-          <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
-          <h2 className="popup__title">Новое место</h2>
-          <form className="form" name="add-image" novalidate>
-            <fieldset className="form__set">
-              <input 
-                type="text"
-                className="form__input form__input_type_place"
-                placeholder="Название"
-                value=""
-                id="input-name"
-                minlength="2"
-                maxlength="30"
-                required
-                />
-              <span className="form__input-error input-name-error"></span>
-            </fieldset>
+    <PopupWithForm 
+    name="add-image" 
+    title="Новое место" 
+    titleBtn="Создать" 
+    isOpen={isAddPlacePopupOpen}
+    onClose={() => setIsAddPlacePopupOpen(false)}
+    >
+      <fieldset class="form__set">
+        <input 
+          type="text"
+          class="form__input form__input_type_place"
+          placeholder="Название"
+          value=""
+          id="input-name"
+          minlength="2"
+          maxlength="30"
+          required
+          />
+        <span class="form__input-error input-name-error"></span>
+      </fieldset>
 
-            <fieldset className="form__set">
-              <input
-                type="url"
-                className="form__input form__input_type_link"
-                placeholder="Ссылка на картинку"
-                value=""
-                id="input-link"
-                required />
-              <span className="form__input-error input-link-error"></span>
-            </fieldset>
-            <button className="button button_type_save" value="Создать" id="button-add">Создать</button>
-          </form>
-        </div>
-      </div>
+      <fieldset class="form__set">
+        <input
+          type="url"
+          class="form__input form__input_type_link"
+          placeholder="Ссылка на картинку"
+          value=""
+          id="input-link"
+          required
+          />
+        <span class="form__input-error input-link-error"></span>
+      </fieldset>
+    </PopupWithForm>
 
-      <div className="popup popup_type_delete">
-        <div className="popup__container">
-          <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
-          <h2 className="popup__title popup__title_type_delete">Вы уверены?</h2>
-          <button className="button button_type_save button_type_delete" type="button" value="Удалить" id="button-delete">Да</button>
-        </div>
-      </div>
+    <PopupWithForm 
+      name="avatar" 
+      title="Обновить аватар" 
+      titleBtn="Сохранить" 
+      isOpen={isEditAvatarPopupOpen}
+      onClose={() => setIsEditAvatarPopupOpen(false)}
+    >
+      <fieldset class="form__set">
+        <input
+          type="url"
+          class="form__input form__input_type_link"
+          placeholder="Ссылка на картинку"
+          value=""
+          id="input-avatar"
+          required
+          />
+        <span class="form__input-error input-avatar-error"></span>
+      </fieldset>
+    </PopupWithForm>
 
-      <div className="popup popup_type_avatar">
-        <div className="popup__container">
-          <button type="button" className="button button_type_close" aria-label="Закрыть окно"></button>
-          <h2 className="popup__title">Обновить аватар</h2>
-          <form className="form" name="avatar" novalidate>
-            <fieldset className="form__set">
-              <input
-                type="url"
-                className="form__input form__input_type_link"
-                placeholder="Ссылка на картинку"
-                value=""
-                id="input-avatar"
-                required />
-              <span className="form__input-error input-avatar-error"></span>
-            </fieldset>
-            <button className="button button_type_save" value="Сохранить" id="button-avatar">Сохранить</button>
-          </form>
-        </div>
-      </div>
-
+    <PopupWithForm 
+      name="delete" 
+      title="Вы уверены?" 
+      titleBtn="Да"
+    >
+    </PopupWithForm>
+    <ImagePopup />
       <template id="cards">
         <li className="card">
           <button className="button button_type_card" type="button" name="card-image">

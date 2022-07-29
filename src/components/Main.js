@@ -1,28 +1,14 @@
 import React from "react";
 
-function handleEditAvatarClick() {
-  const avatarPopup = document.querySelector('.popup_type_avatar');
-  avatarPopup.classList.add('popup_opened');
-}
 
-function handleEditProfileClick() {
-  const profilePopup = document.querySelector('.popup_type_edit-profile');
-  profilePopup.classList.add('popup_opened');
-}
-
-function handleAddPlaceClick() {
-  const newPlacePopup = document.querySelector('.popup_type_add-image');
-  newPlacePopup.classList.add('popup_opened');
-}
-
-function Main() {
+function Main(props) {
   return (
     <main className="containt">
       <section className="profile">
         <div className="profile__space-between">
           <div className="profile__avatar-container">
             <button 
-              onClick={handleEditAvatarClick} 
+              onClick={props.onEditAvatar} 
               className="button button_type_avatar" 
               type="button" 
               aria-label="Изменить аватар" 
@@ -34,7 +20,7 @@ function Main() {
             <div className="profile__flex-name">
               <h1 className="profile__name">Жак-Ив Кусто</h1>
               <button 
-                onClick={handleEditProfileClick}
+                onClick={props.onEditProfile}
                 className="button button_type_edit"
                 type="button"
                 aria-label="Редактировать имя и информацию"
@@ -45,7 +31,7 @@ function Main() {
           </div>
         </div>
         <button
-          onClick={handleAddPlaceClick}
+          onClick={props.onAddPlace}
           className="button button_type_add"
           type="button"
           aria-label="Добавить изображение"
