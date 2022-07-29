@@ -10,7 +10,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
-  
+
   return (
     <div className="page">
       <Header />
@@ -27,32 +27,32 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={() => setIsEditProfilePopupOpen(false)}
       >
-      <fieldset class="form__set">
+      <fieldset className="form__set">
         <input
           type="text"
-          class="form__input form__input_type_name"
+          className="form__input form__input_type_name"
           placeholder="Ваше имя"
           value=""
           id="input-title"
-          minlength="2"
-          maxlength="40"
+          // minlength="2"
+          // maxlength="40"
           required
           />
-        <span class="form__input-error input-title-error"></span>
+        <span className="form__input-error input-title-error"></span>
       </fieldset>
 
-      <fieldset class="form__set">
+      <fieldset className="form__set">
         <input
           type="text"
-          class="form__input form__input_type_job"
+          className="form__input form__input_type_job"
           placeholder="Информация о работе"
           value=""
           id="input-job"
-          minlength="2"
-          maxlength="200"
+          // minlength="2"
+          // maxlength="200"
           required
           />
-        <span class="form__input-error input-job-error"></span>
+        <span className="form__input-error input-job-error"></span>
       </fieldset>
     </PopupWithForm>
 
@@ -63,30 +63,30 @@ function App() {
     isOpen={isAddPlacePopupOpen}
     onClose={() => setIsAddPlacePopupOpen(false)}
     >
-      <fieldset class="form__set">
+      <fieldset className="form__set">
         <input 
           type="text"
-          class="form__input form__input_type_place"
+          className="form__input form__input_type_place"
           placeholder="Название"
           value=""
           id="input-name"
-          minlength="2"
-          maxlength="30"
+          // minlength="2"
+          // maxlength="30"
           required
           />
-        <span class="form__input-error input-name-error"></span>
+        <span className="form__input-error input-name-error"></span>
       </fieldset>
 
-      <fieldset class="form__set">
+      <fieldset className="form__set">
         <input
           type="url"
-          class="form__input form__input_type_link"
+          className="form__input form__input_type_link"
           placeholder="Ссылка на картинку"
           value=""
           id="input-link"
           required
           />
-        <span class="form__input-error input-link-error"></span>
+        <span className="form__input-error input-link-error"></span>
       </fieldset>
     </PopupWithForm>
 
@@ -97,16 +97,16 @@ function App() {
       isOpen={isEditAvatarPopupOpen}
       onClose={() => setIsEditAvatarPopupOpen(false)}
     >
-      <fieldset class="form__set">
+      <fieldset className="form__set">
         <input
           type="url"
-          class="form__input form__input_type_link"
+          className="form__input form__input_type_link"
           placeholder="Ссылка на картинку"
           value=""
           id="input-avatar"
           required
           />
-        <span class="form__input-error input-avatar-error"></span>
+        <span className="form__input-error input-avatar-error"></span>
       </fieldset>
     </PopupWithForm>
 

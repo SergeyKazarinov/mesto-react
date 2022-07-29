@@ -11,9 +11,9 @@ function PopupWithForm({name, title, titleBtn, isOpen, children, onClose}) {
           aria-label="Закрыть окно"
         ></button>
         <h2 className="popup__title">{title}</h2>
-        <form className="form" name={name} /*"profile-edit"*/ novalidate>
+        <form className="form" name={name} /*"profile-edit"*/ noValidate>
           {children}
-          <button class="button button_type_save" value={titleBtn} id="button-save">{titleBtn}</button>
+          <button className="button button_type_save" value={titleBtn} id="button-save">{titleBtn}</button>
         </form>
       </div>
     </div>

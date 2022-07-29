@@ -1,37 +1,54 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import api from "./utils/Api";
 
 
-function Main(props) {
+function Main({onEditAvatar, onEditProfile, onAddPlace}) {
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+
+  useEffect(() => {
+    api.getUserInfo()
+      .then((res) => {
+        setUserName(res.name);
+        setUserAvatar(res.avatar);
+        setUserDescription(res.about);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <main className="containt">
       <section className="profile">
         <div className="profile__space-between">
           <div className="profile__avatar-container">
             <button 
-              onClick={props.onEditAvatar} 
+              onClick={onEditAvatar} 
               className="button button_type_avatar" 
               type="button" 
               aria-label="Изменить аватар" 
               name="avatar-button">
             </button>
-            <img className="profile__avatar" src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg" alt="Аватар" />
+            <img className="profile__avatar" src={userAvatar} alt="Аватар" />
           </div>
           <div className="profile__info">
             <div className="profile__flex-name">
-              <h1 className="profile__name">Жак-Ив Кусто</h1>
+              <h1 className="profile__name">{userName}</h1>
               <button 
-                onClick={props.onEditProfile}
+                onClick={onEditProfile}
                 className="button button_type_edit"
                 type="button"
                 aria-label="Редактировать имя и информацию"
                 name="edit-button">
               </button>
             </div>
-              <span className="profile__job">Исследователь океана</span>
+              <span className="profile__job">{userDescription}</span>
           </div>
         </div>
         <button
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
           className="button button_type_add"
           type="button"
           aria-label="Добавить изображение"
