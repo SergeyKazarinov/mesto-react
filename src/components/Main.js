@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import Card from "./Card";
 import api from "./utils/Api";
 
 
@@ -6,6 +7,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace}) {
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo()
@@ -13,10 +15,19 @@ function Main({onEditAvatar, onEditProfile, onAddPlace}) {
         setUserName(res.name);
         setUserAvatar(res.avatar);
         setUserDescription(res.about);
+        console.dir(res);
       })
       .catch((err) => {
         console.log(err);
       });
+
+      api.getInitialCards()
+        .then((res) => {
+          setCards(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }, []);
 
   return (
@@ -57,7 +68,12 @@ function Main({onEditAvatar, onEditProfile, onAddPlace}) {
       </section>
       <section className="elements">
         <ul className="elements__grid list">
-        
+          {cards.map((card) => {
+            return <Card 
+            key = {card._id}
+            card = {card}
+            />
+          })}
       </ul>
     </section>
   </main>

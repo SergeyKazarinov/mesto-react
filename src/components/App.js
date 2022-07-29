@@ -117,21 +117,6 @@ function App() {
     >
     </PopupWithForm>
     <ImagePopup />
-      <template id="cards">
-        <li className="card">
-          <button className="button button_type_card" type="button" name="card-image">
-          <img className="card__image" src="./images/Image1.jpg" alt="" /></button>
-          <button className="button button_type_remove" type="button" aria-label="Удалить картинку" name="remove-image"></button>
-          <div className="card__item">
-            <h2 className="card__text"></h2>
-            <div className="card__like">
-              <button className="button button_type_like" type="button" aria-label="Поставить лайк" name="like"></button>
-              <span className="card__like-item"></span>
-            </div>
-          </div>
-        </li>
-      </template>
-      
     </div>
   );
 }
