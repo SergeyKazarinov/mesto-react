@@ -1,0 +1,11 @@
+.profile__flex-name {
+  display: flex;
+  gap: 18px;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__flex-name {
+    gap: 10px;
+    margin-left: 28px;
+  }
+}
