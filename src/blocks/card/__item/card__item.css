@@ -1,0 +1,8 @@
+.card__item {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 20px 31px 21px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  /* max-height: 23px; */
+}

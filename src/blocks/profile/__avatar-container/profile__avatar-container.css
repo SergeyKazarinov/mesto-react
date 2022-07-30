@@ -1,0 +1,24 @@
+.profile__avatar-container {
+  width: 120px;
+  height: 120px;
+  z-index: 1;
+  position: relative;
+  border-radius: 50%;
+}
+
+.profile__avatar-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 50%;
+  opacity: 1;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+
+.profile__avatar-container:hover .profile__avatar {
+  opacity: .6;
+}

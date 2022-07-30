@@ -1,0 +1,11 @@
+.profile__avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  justify-self: start;
+  z-index: 1;
+  transition: .5s;
+}
