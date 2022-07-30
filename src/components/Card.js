@@ -13,9 +13,9 @@ function Card({card, onCardClick}) {
       name="card-image"
       onClick={handleClick}
       >
-        <img className="card__image" src={card.link} alt="" />
+        <img className="card__image" src={card.link} alt={card.name} />
       </button>
-      <button className={`button button_type_remove ${(card.owner._id === "1f938e0ac95d82203f13dc8c") ? 'button_type_remove-active' : ''}`} type="button" aria-label="Удалить картинку" name="remove-image"></button>
+      <button className="button button_type_remove" type="button" aria-label="Удалить картинку" name="remove-image"></button>
       <div className="card__item">
         <h2 className="card__text">{card.name}</h2>
         <div className="card__like">

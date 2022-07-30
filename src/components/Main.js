@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Card from "./Card";
-import api from "./utils/Api";
+import api from "./Api";
 
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
@@ -68,11 +68,11 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
       <section className="elements">
         <ul className="elements__grid list">
           {cards.map((card) => {
-            return <Card 
+            return (<Card 
             key={card._id}
             card={card}
             onCardClick={onCardClick}
-            />
+            />)
           })}
       </ul>
     </section>
