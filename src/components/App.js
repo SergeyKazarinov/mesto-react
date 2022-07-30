@@ -12,6 +12,25 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [selectedCard, setSelectCard] = useState({isOpen: false, card: {}});
 
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true)
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true)
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true)
+  }
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectCard({isOpen: false, card: {}});
+  }
+
   function handleCardClick(card) {
     setSelectCard({isOpen: true, card: card});
   }
@@ -20,9 +39,9 @@ function App() {
     <div className="page">
       <Header />
       <Main 
-        onEditProfile={() => setIsEditProfilePopupOpen(true)} 
-        onAddPlace={() => setIsAddPlacePopupOpen(true)} 
-        onEditAvatar={() => setIsEditAvatarPopupOpen(true)}
+        onEditProfile={handleEditProfileClick} 
+        onAddPlace={handleAddPlaceClick} 
+        onEditAvatar={handleEditAvatarClick}
         onCardClick={handleCardClick}
       />
       <Footer />
@@ -31,7 +50,7 @@ function App() {
         title="Редактировать профиль" 
         titleBtn="Сохранить" 
         isOpen={isEditProfilePopupOpen}
-        onClose={() => setIsEditProfilePopupOpen(false)}
+        onClose={closeAllPopups}
       >
         <FieldSet 
           inputType="text"
@@ -57,7 +76,7 @@ function App() {
       title="Новое место" 
       titleBtn="Создать" 
       isOpen={isAddPlacePopupOpen}
-      onClose={() => setIsAddPlacePopupOpen(false)}
+      onClose={closeAllPopups}
     >
       <FieldSet 
         inputType="text"
@@ -81,7 +100,7 @@ function App() {
       title="Обновить аватар" 
       titleBtn="Сохранить" 
       isOpen={isEditAvatarPopupOpen}
-      onClose={() => setIsEditAvatarPopupOpen(false)}
+      onClose={closeAllPopups}
     >
       <FieldSet 
         inputType="url"
@@ -99,7 +118,7 @@ function App() {
     </PopupWithForm>
     <ImagePopup 
       card = {selectedCard}
-      onClose = {() => setSelectCard({isOpen: false, card: {}})}
+      onClose = {closeAllPopups}
     />
     </div>
   );
