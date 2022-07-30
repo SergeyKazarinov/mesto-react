@@ -3,7 +3,7 @@ import Card from "./Card";
 import api from "./utils/Api";
 
 
-function Main({onEditAvatar, onEditProfile, onAddPlace}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
@@ -15,7 +15,6 @@ function Main({onEditAvatar, onEditProfile, onAddPlace}) {
         setUserName(res.name);
         setUserAvatar(res.avatar);
         setUserDescription(res.about);
-        console.dir(res);
       })
       .catch((err) => {
         console.log(err);
@@ -70,8 +69,9 @@ function Main({onEditAvatar, onEditProfile, onAddPlace}) {
         <ul className="elements__grid list">
           {cards.map((card) => {
             return <Card 
-            key = {card._id}
-            card = {card}
+            key={card._id}
+            card={card}
+            onCardClick={onCardClick}
             />
           })}
       </ul>

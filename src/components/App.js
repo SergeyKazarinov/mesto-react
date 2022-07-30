@@ -9,7 +9,11 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [selectedCard, setSelectCard] = useState({isOpen: false, card: {}});
 
+  function handleCardClick(card) {
+    setSelectCard({isOpen: true, card: card});
+  }
 
   return (
     <div className="page">
@@ -18,6 +22,7 @@ function App() {
         onEditProfile={() => setIsEditProfilePopupOpen(true)} 
         onAddPlace={() => setIsAddPlacePopupOpen(true)} 
         onEditAvatar={() => setIsEditAvatarPopupOpen(true)}
+        onCardClick={handleCardClick}
       />
       <Footer />
       <PopupWithForm 
@@ -32,10 +37,10 @@ function App() {
           type="text"
           className="form__input form__input_type_name"
           placeholder="Ваше имя"
-          value=""
+          // value=""
           id="input-title"
-          // minlength="2"
-          // maxlength="40"
+          minLength="2"
+          maxLength="40"
           required
           />
         <span className="form__input-error input-title-error"></span>
@@ -46,10 +51,10 @@ function App() {
           type="text"
           className="form__input form__input_type_job"
           placeholder="Информация о работе"
-          value=""
+          // value=""
           id="input-job"
-          // minlength="2"
-          // maxlength="200"
+          minLength="2"
+          maxLength="200"
           required
           />
         <span className="form__input-error input-job-error"></span>
@@ -68,10 +73,10 @@ function App() {
           type="text"
           className="form__input form__input_type_place"
           placeholder="Название"
-          value=""
+          // value=""
           id="input-name"
-          // minlength="2"
-          // maxlength="30"
+          minLength="2"
+          maxLength="30"
           required
           />
         <span className="form__input-error input-name-error"></span>
@@ -82,7 +87,7 @@ function App() {
           type="url"
           className="form__input form__input_type_link"
           placeholder="Ссылка на картинку"
-          value=""
+          // value=""
           id="input-link"
           required
           />
@@ -102,7 +107,7 @@ function App() {
           type="url"
           className="form__input form__input_type_link"
           placeholder="Ссылка на картинку"
-          value=""
+          // value=""
           id="input-avatar"
           required
           />
@@ -116,7 +121,10 @@ function App() {
       titleBtn="Да"
     >
     </PopupWithForm>
-    <ImagePopup />
+    <ImagePopup 
+    card = {selectedCard}
+    onClose = {() => setSelectCard({isOpen: false, card: {}})}
+    />
     </div>
   );
 }
