@@ -1,13 +1,57 @@
 import React, {useState, useEffect, useContext} from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "./CurrentUserContext";
-import { CurrentCardsContext } from "./CurrentCardsContext";
 import api from "./utils/Api";
 
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-  const user = useContext(CurrentUserContext);
-  const cards = useContext(CurrentCardsContext);
+  const currentUser = useContext(CurrentUserContext);
+  const [cards, setCards] = useState([]);
+
+
+  useEffect(() => {
+    api.getInitialCards()
+    .then((res) => {
+      setCards(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    if(isLiked) {
+      api.deleteLike(card)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else {
+      api.setLike(card)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card)
+      .then(() => {
+        setCards((cards) => {
+          return cards.filter(item => item !== card);
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <main className="containt">
@@ -21,11 +65,11 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
               aria-label="Изменить аватар" 
               name="avatar-button">
             </button>
-            <img className="profile__avatar" src={user.avatar} alt="Аватар" />
+            <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" />
           </div>
           <div className="profile__info">
             <div className="profile__flex-name">
-              <h1 className="profile__name">{user.name}</h1>
+              <h1 className="profile__name">{currentUser.name}</h1>
               <button 
                 onClick={onEditProfile}
                 className="button button_type_edit"
@@ -34,7 +78,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
                 name="edit-button">
               </button>
             </div>
-              <span className="profile__job">{user.about}</span>
+              <span className="profile__job">{currentUser.about}</span>
           </div>
         </div>
         <button
@@ -51,9 +95,9 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
             return <Card 
             key={card._id}
             card={card}
-            onCardClick={onCardClick}
-            isOwn = {card.owner._id === user._id}
-            isLiked = {card.likes.some(i => i._id === user._id)}
+            onCardClick = {onCardClick}
+            onCardLike = {handleCardLike}
+            onCardDelete = {handleCardDelete}
             />
           })}
       </ul>

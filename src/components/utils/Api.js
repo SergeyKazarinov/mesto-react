@@ -72,8 +72,8 @@ class Api {
       })
   }
 
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  deleteCard(card) {
+    return fetch(`${this._baseUrl}/cards/${card._id}`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -83,7 +83,7 @@ class Api {
   }
 
   setLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._item._id}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${data._id}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
@@ -93,7 +93,7 @@ class Api {
   }
 
   deleteLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._item._id}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${data._id}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })

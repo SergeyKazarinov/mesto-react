@@ -7,7 +7,6 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import api from "./utils/Api";
 import {CurrentUserContext} from './CurrentUserContext';
-import {CurrentCardsContext} from './CurrentCardsContext'
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -15,7 +14,6 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [selectedCard, setSelectCard] = useState({isOpen: false, card: {}});
   const [currentUser, setCurrentUser] = useState({});
-  const [currentCards, setCurrentCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo()
@@ -25,14 +23,6 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-
-    api.getInitialCards()
-    .then((res) => {
-      setCurrentCards(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   }, []);
 
   function handleCardClick(card) {
@@ -42,7 +32,6 @@ function App() {
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-      <CurrentCardsContext.Provider value={currentCards}>
         <Header />
         <Main 
           onEditProfile={() => setIsEditProfilePopupOpen(true)} 
@@ -126,7 +115,6 @@ function App() {
           card = {selectedCard}
           onClose = {() => setSelectCard({isOpen: false, card: {}})}
         />
-      </CurrentCardsContext.Provider>
       </CurrentUserContext.Provider>
     </div>
   );
