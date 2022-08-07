@@ -1,25 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import Card from "./Card";
+import { CurrentUserContext } from "./CurrentUserContext";
 import api from "./utils/Api";
 
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
   const [cards, setCards] = useState([]);
+  const user = useContext(CurrentUserContext);
 
   useEffect(() => {
-    api.getUserInfo()
-      .then((res) => {
-        setUserName(res.name);
-        setUserAvatar(res.avatar);
-        setUserDescription(res.about);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
       api.getInitialCards()
         .then((res) => {
           setCards(res);
@@ -41,11 +30,11 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
               aria-label="Изменить аватар" 
               name="avatar-button">
             </button>
-            <img className="profile__avatar" src={userAvatar} alt="Аватар" />
+            <img className="profile__avatar" src={user.avatar} alt="Аватар" />
           </div>
           <div className="profile__info">
             <div className="profile__flex-name">
-              <h1 className="profile__name">{userName}</h1>
+              <h1 className="profile__name">{user.name}</h1>
               <button 
                 onClick={onEditProfile}
                 className="button button_type_edit"
@@ -54,7 +43,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
                 name="edit-button">
               </button>
             </div>
-              <span className="profile__job">{userDescription}</span>
+              <span className="profile__job">{user.about}</span>
           </div>
         </div>
         <button
