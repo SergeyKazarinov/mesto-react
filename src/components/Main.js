@@ -1,22 +1,13 @@
 import React, {useState, useEffect, useContext} from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "./CurrentUserContext";
+import { CurrentCardsContext } from "./CurrentCardsContext";
 import api from "./utils/Api";
 
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-  const [cards, setCards] = useState([]);
   const user = useContext(CurrentUserContext);
-
-  useEffect(() => {
-      api.getInitialCards()
-        .then((res) => {
-          setCards(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  }, []);
+  const cards = useContext(CurrentCardsContext);
 
   return (
     <main className="containt">
@@ -61,6 +52,8 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
             key={card._id}
             card={card}
             onCardClick={onCardClick}
+            isOwn = {card.owner._id === user._id}
+            isLiked = {card.likes.some(i => i._id === user._id)}
             />
           })}
       </ul>
