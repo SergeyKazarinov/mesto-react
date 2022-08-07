@@ -1,6 +1,6 @@
 import React from "react";
 
-function FieldSet({inputType, inputClassType, placeholder, id, minLength, maxLength, value, onChange}) {
+function FieldSet({inputType, inputClassType, placeholder, id, minLength, maxLength, value, onChange, inputRef}) {
   return(
     <fieldset className="form__set">
         <input 
@@ -13,6 +13,7 @@ function FieldSet({inputType, inputClassType, placeholder, id, minLength, maxLen
           maxLength={maxLength}
           onChange={onChange}
           required
+          ref={inputRef}
           />
         <span className={`form__input-error ${id}-error`}></span>
       </fieldset>

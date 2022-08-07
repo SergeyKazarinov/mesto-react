@@ -6,9 +6,9 @@ import ImagePopup from "./ImagePopup";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import api from "./Api";
-import {CurrentUserContext} from './CurrentUserContext';
-import EditProfilePopup from "./EditProfilePopup";
-
+import {CurrentUserContext} from '../context/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup'
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -52,7 +52,6 @@ function App() {
   function handleUpdateUser(userData) {
     api.patchUserInfo(userData)
       .then((res) => {
-        console.log(res);
         setCurrentUser(res);
       })
       .catch((err) => {
@@ -61,7 +60,20 @@ function App() {
       .finally(() => {
         closeAllPopups();
       });
-  } 
+  }
+
+  function handleUpdateAvatar(avatarLink) {
+    api.patchAvatarInfo(avatarLink)
+    .then((res) => {
+      setCurrentUser(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      closeAllPopups();
+    });
+  }
 
   return (
     <div className="page">
@@ -105,20 +117,11 @@ function App() {
           />
         </PopupWithForm>
 
-        <PopupWithForm 
-          name="avatar" 
-          title="Обновить аватар" 
-          titleBtn="Сохранить" 
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        >
-          <FieldSet 
-            inputType="url"
-            inputClassType="link"
-            placeholder="Ссылка на картинку"
-            id="input-avatar"
-          />
-        </PopupWithForm>
+        <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
+        />
 
         <PopupWithForm 
           name="delete" 
