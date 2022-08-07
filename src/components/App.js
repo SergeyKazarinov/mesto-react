@@ -9,12 +9,15 @@ import api from "./Api";
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup'
+import AddPlacePopup from "./AddPlacePopup";
+
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [selectedCard, setSelectCard] = useState({isOpen: false, card: {}});
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo()
@@ -24,6 +27,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+
+    api.getInitialCards()
+    .then((res) => {
+      setCards(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }, []);
 
   function handleEditAvatarClick() {
@@ -75,6 +86,54 @@ function App() {
     });
   }
 
+  function handleAddPlaceSubmit(newCard) {
+    console.log(newCard);
+    api.addNewCard(newCard)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        closeAllPopups();
+      });
+  }
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    if(isLiked) {
+      api.deleteLike(card)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else {
+      api.setLike(card)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card)
+      .then(() => {
+        setCards((cards) => {
+          return cards.filter(item => item !== card);
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -84,6 +143,9 @@ function App() {
           onAddPlace={handleAddPlaceClick} 
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
         <Footer />
         
@@ -93,34 +155,16 @@ function App() {
           onUpdateUser={handleUpdateUser}
         /> 
 
-        <PopupWithForm 
-          name="add-image" 
-          title="Новое место" 
-          titleBtn="Создать" 
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+
+        <AddPlacePopup 
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-        >
-          <FieldSet 
-            inputType="text"
-            inputClassType="place"
-            placeholder="Название"
-            id="input-name"
-            minLength="2"
-            maxLength="30"
-          />
-
-          <FieldSet 
-            inputType="url"
-            inputClassType="link"
-            placeholder="Ссылка на картинку"
-            id="input-link"
-          />
-        </PopupWithForm>
-
-        <EditAvatarPopup
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        onUpdateAvatar={handleUpdateAvatar}
+          onAddPlace={handleAddPlaceSubmit}
         />
 
         <PopupWithForm 

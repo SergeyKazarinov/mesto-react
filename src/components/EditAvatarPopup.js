@@ -9,6 +9,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   function handleClick(e) {
     e.preventDefault();
     onUpdateAvatar(inputRef.current.value);
+    inputRef.current.value='';
   }
 
 
