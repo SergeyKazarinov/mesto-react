@@ -4,8 +4,7 @@ import FieldSet from "./Fieldset";
 
 function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   const inputRef = useRef();
-  
-  console.log()
+
   function handleClick(e) {
     e.preventDefault();
     onUpdateAvatar(inputRef.current.value);

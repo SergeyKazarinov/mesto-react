@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import FieldSet from "./Fieldset";
 import Footer from "./Footer";
 import Header from "./Header";
 import ImagePopup from "./ImagePopup";
@@ -37,16 +36,28 @@ function App() {
     });
   }, []);
 
+  function handleEscClose(e) {
+    e.key === "Escape" && closeAllPopups();
+  }
+
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(true)
+    setIsEditAvatarPopupOpen(true);
+    window.addEventListener('keydown', handleEscClose);
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true)
+    window.addEventListener('keydown', handleEscClose);
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
+    window.addEventListener('keydown', handleEscClose);
+  }
+
+  function handleCardClick(card) {
+    setSelectCard({isOpen: true, card: card});
+    window.addEventListener('keydown', handleEscClose);
   }
 
   function closeAllPopups() {
@@ -54,10 +65,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectCard({isOpen: false, card: {}});
-  }
-  
-  function handleCardClick(card) {
-    setSelectCard({isOpen: true, card: card});
+    window.removeEventListener('keydown', handleEscClose);
   }
 
   function handleUpdateUser(userData) {
