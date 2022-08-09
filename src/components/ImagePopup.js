@@ -1,8 +1,13 @@
 import React from "react";
 
 function ImagePopup({card, onClose}) {
+  function handleCLoseOverlayClick(e) {
+    if(e.target === e.currentTarget) {
+      onClose();
+    }
+  }
   return(
-    <div className={`popup popup_type_image-zoom ${card.isOpen ? 'popup_opened' : ''}`}>
+    <div className={`popup popup_type_image-zoom ${card.isOpen ? 'popup_opened' : ''}`} onClick={handleCLoseOverlayClick}>
       <div className="popup__container-image">
         <button 
           type="button"

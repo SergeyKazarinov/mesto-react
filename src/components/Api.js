@@ -35,22 +35,19 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        name: data.title,
-        about: data.job
-      })
+      body: JSON.stringify(data)
     })
     .then((res) => {
       return this._checkAnswer(res);
     })
   }
 
-  patchAvatarInfo(data) {
+  patchAvatarInfo(avatarLink) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar
+        avatar: avatarLink
       })
     })
     .then((res) => {
@@ -72,8 +69,9 @@ class Api {
       })
   }
 
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  deleteCard(card) {
+    return fetch(`${this._baseUrl}/cards/${card._id}`, {
+
       method: 'DELETE',
       headers: this._headers
     })
@@ -83,7 +81,7 @@ class Api {
   }
 
   setLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._item._id}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${data._id}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
@@ -93,7 +91,7 @@ class Api {
   }
 
   deleteLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._item._id}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${data._id}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })
