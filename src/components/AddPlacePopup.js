@@ -8,16 +8,19 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   const [isLinkValid, setIsLinkValid] = useState (false);
   const [isNameValid, setIsNameValid] = useState (false);
   const [isButtonValid, setIsButtonValid] = useState (false);
-  
+  const [buttonSubmitName, setButtonSubmitName] = useState('Создать')
+
   useEffect(() => {
     nameInputRef.current.value='';
     linkInputRef.current.value='';
     setIsLinkValid(false);
     setIsNameValid(false);
+    setButtonSubmitName('Создать')
   }, [isOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
+    setButtonSubmitName('Сохранение...')
     onAddPlace({
       link: linkInputRef.current.value,
       name: nameInputRef.current.value
@@ -53,7 +56,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
     <PopupWithForm 
           name="add-image" 
           title="Новое место" 
-          titleBtn="Создать" 
+          titleBtn={buttonSubmitName}
           isOpen={isOpen}
           onClose={onClose}
           onSubmit={handleSubmit}

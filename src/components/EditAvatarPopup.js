@@ -6,10 +6,12 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   const inputRef = useRef();
   const [isLinkValid, setIsLinkValid] = useState (false);
   const [isButtonValid, setIsButtonValid] = useState (false);
+  const [buttonSubmitName, setButtonSubmitName] = useState('Сохранить')
 
   useEffect(() => {
     inputRef.current.value='';
     setIsLinkValid(false);
+    setButtonSubmitName('Сохранить')
   }, [isOpen])
 
   useEffect(() => {
@@ -18,6 +20,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
 
   function handleClick(e) {
     e.preventDefault();
+    setButtonSubmitName('Сохранение...')
     onUpdateAvatar(inputRef.current.value);
     inputRef.current.value='';
   }
@@ -35,7 +38,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
     <PopupWithForm 
           name="avatar" 
           title="Обновить аватар" 
-          titleBtn="Сохранить" 
+          titleBtn={buttonSubmitName}
           isOpen={isOpen}
           onClose={onClose}
           onClick={handleClick}
