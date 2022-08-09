@@ -7,29 +7,30 @@ function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubm
     }
   }
 
-  return(
-    <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`} onMouseDown={handleCLoseOverlayClick}>
+  return (
+    <div
+      className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}
+      onMouseDown={handleCLoseOverlayClick}
+    >
       <div className="popup__container">
         <button
           onClick={onClose}
-          type="button" 
+          type="button"
           className="button button_type_close"
           aria-label="Закрыть окно"
-        ></button>
+        />
         <h2 className="popup__title">{title}</h2>
-        <form
-          className="form"
-          name={name}
-          onSubmit={onSubmit}
-          >
+        <form className="form" name={name} onSubmit={onSubmit}>
           {children}
           <button
-            className={`button button_type_save ${!isValid && 'button_inactive'}`}
+            className={`button button_type_save ${
+              !isValid && "button_inactive"
+            }`}
             value={titleBtn}
             id="button-save"
             disabled={!isValid ? true : false}
           >
-          {titleBtn}
+            {titleBtn}
           </button>
         </form>
       </div>

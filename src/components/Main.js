@@ -43,15 +43,15 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCa
       </section>
       <section className="elements">
         <ul className="elements__grid list">
-          {cards.map((card) => {
-            return (<Card 
+          {cards.map(card => (
+            <Card 
             key={card._id}
             card={card}
             onCardClick = {onCardClick}
             onCardLike = {onCardLike}
             onCardDelete = {onCardDelete}
             />)
-          })}
+          )}
       </ul>
     </section>
   </main>
