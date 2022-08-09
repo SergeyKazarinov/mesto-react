@@ -41,7 +41,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
           titleBtn={buttonSubmitName}
           isOpen={isOpen}
           onClose={onClose}
-          onClick={handleClick}
+          onSubmit={handleClick}
           isValid={isButtonValid}
         >
           <FieldSet 

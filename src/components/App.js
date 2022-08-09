@@ -9,14 +9,17 @@ import {CurrentUserContext} from '../context/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from "./AddPlacePopup";
+import DeleteCardPopup from "./DeleteCardPopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [selectedCard, setSelectCard] = useState({isOpen: false, card: {}});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [card, setCard] = useState({})
 
   useEffect(() => {
     api.getUserInfo()
@@ -55,6 +58,12 @@ function App() {
     window.addEventListener('keydown', handleEscClose);
   }
 
+  function handleDeleteCardClick(card) {
+    setCard(card);
+    setIsDeleteCardPopupOpen(true);
+    window.addEventListener('keydown', handleEscClose);
+  }
+
   function handleCardClick(card) {
     setSelectCard({isOpen: true, card: card});
     window.addEventListener('keydown', handleEscClose);
@@ -64,6 +73,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsDeleteCardPopupOpen(false);
     setSelectCard({isOpen: false, card: {}});
     window.removeEventListener('keydown', handleEscClose);
   }
@@ -138,6 +148,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   }
 
@@ -152,7 +165,7 @@ function App() {
           onCardClick={handleCardClick}
           cards={cards}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
+          onCardDelete={handleDeleteCardClick}
         />
         <Footer />
         
@@ -174,12 +187,13 @@ function App() {
           onAddPlace={handleAddPlaceSubmit}
         />
 
-        <PopupWithForm 
-          name="delete" 
-          title="Вы уверены?" 
-          titleBtn="Да"
-        >
-        </PopupWithForm>
+        <DeleteCardPopup
+          isOpen={isDeleteCardPopupOpen}
+          onClose={closeAllPopups}
+          onSubmit={handleCardDelete}
+          card={card}
+        />
+
         <ImagePopup 
           card = {selectedCard}
           onClose = {() => setSelectCard({isOpen: false, card: {}})}

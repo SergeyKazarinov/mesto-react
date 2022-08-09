@@ -1,6 +1,6 @@
 import React from "react";
 
-function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubmit, onClick, isValid}) {
+function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubmit, isValid, card}) {
   function handleCLoseOverlayClick(e) {
     if(e.target === e.currentTarget) {
       onClose();
@@ -19,7 +19,7 @@ function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubm
         <h2 className="popup__title">{title}</h2>
         <form
           className="form"
-          name={name} /*"profile-edit"*/
+          name={name}
           onSubmit={onSubmit}
           >
           {children}
@@ -27,7 +27,6 @@ function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubm
             className={`button button_type_save ${!isValid && 'button_inactive'}`}
             value={titleBtn}
             id="button-save"
-            onClick={onClick}
             disabled={!isValid ? true : false}
           >
           {titleBtn}
