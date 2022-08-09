@@ -1,10 +1,20 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 import FieldSet from "./Fieldset";
 
 function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   const linkInputRef = useRef();
   const nameInputRef = useRef();
+  const [isLinkValid, setIsLinkValid] = useState (false);
+  const [isNameValid, setIsNameValid] = useState (false);
+  const [isButtonValid, setIsButtonValid] = useState (false);
+  
+  useEffect(() => {
+    nameInputRef.current.value='';
+    linkInputRef.current.value='';
+    setIsLinkValid(false);
+    setIsNameValid(false);
+  }, [isOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -12,9 +22,32 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
       link: linkInputRef.current.value,
       name: nameInputRef.current.value
     });
-    nameInputRef.current.value='';
-    linkInputRef.current.value='';
   }
+
+  function handleLinkChange(e) {
+    if(linkInputRef.current.validity.valid) {
+      setIsLinkValid(true);
+    }
+    else {
+      setIsLinkValid(false);
+    }
+  }
+
+  function handleNameChange(e) {
+    if(nameInputRef.current.validity.valid) {
+      setIsNameValid(true);
+    }
+    else {
+      setIsNameValid(false);
+    }
+  }
+
+  useEffect(() => {
+    if(isLinkValid && isNameValid) {
+      setIsButtonValid(true)
+    }
+    else{setIsButtonValid(false)}
+  }, [isNameValid, isLinkValid])
 
   return(
     <PopupWithForm 
@@ -24,6 +57,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
           isOpen={isOpen}
           onClose={onClose}
           onSubmit={handleSubmit}
+          isValid={isButtonValid}
         >
           <FieldSet 
             inputType="text"
@@ -33,6 +67,8 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
             minLength="2"
             maxLength="30"
             inputRef={nameInputRef}
+            onChange={handleNameChange}
+            isOpen={isOpen}
           />
 
           <FieldSet 
@@ -41,6 +77,8 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
             placeholder="Ссылка на картинку"
             id="input-link"
             inputRef={linkInputRef}
+            onChange={handleLinkChange}
+            isOpen={isOpen}
           />
         </PopupWithForm>
   )

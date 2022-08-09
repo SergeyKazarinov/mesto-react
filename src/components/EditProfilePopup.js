@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import PopupWithForm from "./PopupWithForm";
 import FieldSet from "./Fieldset";
 import { CurrentUserContext } from "../context/CurrentUserContext";
@@ -7,18 +7,35 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [description, setDescription] = useState(currentUser.about);
+  const [isAboutValid, setIsAboutValid] = useState (false);
+  const [isNameValid, setIsNameValid] = useState (false);
+  const [isButtonValid, setIsButtonValid] = useState (false);
 
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]); 
+    setIsAboutValid(true);
+    setIsNameValid(true);
+  }, [currentUser, isOpen]); 
 
   function handleNameChange(e) {
     setName(e.target.value);
+    if(e.target.validity.valid) {
+      setIsNameValid(true);
+    }
+    else {
+      setIsNameValid(false);
+    }
   }
 
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
+    if(e.target.validity.valid) {
+      setIsAboutValid(true);
+    }
+    else {
+      setIsAboutValid(false);
+    }
   }
 
   function handleSubmit(e) {
@@ -30,6 +47,12 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     });
   }
 
+  useEffect(() => {
+    if(isAboutValid && isNameValid) {
+      setIsButtonValid(true);
+    }
+    else{setIsButtonValid(false)}
+  }, [isNameValid, isAboutValid])
 
   return(
     <PopupWithForm 
@@ -39,6 +62,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isValid={isButtonValid}
       >
       <FieldSet 
         inputType="text"
@@ -49,6 +73,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         maxLength="40"
         value={name}
         onChange={handleNameChange}
+        isOpen={isOpen}
       />
 
       <FieldSet 
@@ -60,6 +85,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         maxLength="200"
         value={description}
         onChange={handleDescriptionChange}
+        isOpen={isOpen}
       />
     </PopupWithForm>
   )
