@@ -27,7 +27,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
     });
   }
 
-  function handleLinkChange(e) {
+  function handleLinkChange() {
     if(linkInputRef.current.validity.valid) {
       setIsLinkValid(true);
     }
@@ -36,7 +36,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
     }
   }
 
-  function handleNameChange(e) {
+  function handleNameChange() {
     if(nameInputRef.current.validity.valid) {
       setIsNameValid(true);
     }
@@ -46,10 +46,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   }
 
   useEffect(() => {
-    if(isLinkValid && isNameValid) {
-      setIsButtonValid(true)
-    }
-    else{setIsButtonValid(false)}
+      setIsButtonValid(isLinkValid && isNameValid);
   }, [isNameValid, isLinkValid])
 
   return(

@@ -19,7 +19,7 @@ function FieldSet({inputType, inputClassType, placeholder, id, minLength, maxLen
       setErrorMessage('');
     }
 
-    onChange && onChange(e);
+    onChange(e);
   }
 
   return(
@@ -36,7 +36,7 @@ function FieldSet({inputType, inputClassType, placeholder, id, minLength, maxLen
           required
           ref={inputRef}
           />
-        <span className={`form__input-error ${id}-error ${isValid ? 'form__input-error_active' : ''}`}>{errorMessage}</span>
+        <span className={`form__input-error ${id}-error ${isValid && 'form__input-error_active'}`}>{errorMessage}</span>
       </fieldset>
   )
 }

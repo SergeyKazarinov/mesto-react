@@ -3,7 +3,6 @@ import Footer from "./Footer";
 import Header from "./Header";
 import ImagePopup from "./ImagePopup";
 import Main from "./Main";
-import PopupWithForm from "./PopupWithForm";
 import api from "./Api";
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
@@ -17,7 +16,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [selectedCard, setSelectCard] = useState({isOpen: false, card: {}});
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({name: '', about: ''});
   const [cards, setCards] = useState([]);
   const [card, setCard] = useState({})
 

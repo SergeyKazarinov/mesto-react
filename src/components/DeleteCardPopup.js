@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function DeleteCardPopup({isOpen, onClose, onSubmit, card}) {

@@ -15,7 +15,7 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   }, [isOpen])
 
   useEffect(() => {
-    isLinkValid ? setIsButtonValid(true) : setIsButtonValid(false);
+    setIsButtonValid(isLinkValid);
   }, [isLinkValid]);
 
   function handleClick(e) {

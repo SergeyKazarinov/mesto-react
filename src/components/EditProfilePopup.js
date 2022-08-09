@@ -18,7 +18,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     setIsAboutValid(true);
     setIsNameValid(true);
     setButtonSubmitName('Сохранить');
-  }, [currentUser, isOpen]); 
+  }, [currentUser, !isOpen]); 
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -50,10 +50,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   }
 
   useEffect(() => {
-    if(isAboutValid && isNameValid) {
-      setIsButtonValid(true);
-    }
-    else{setIsButtonValid(false)}
+      setIsButtonValid(isAboutValid && isNameValid);
   }, [isNameValid, isAboutValid])
 
   return(
