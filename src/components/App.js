@@ -63,6 +63,25 @@ function App() {
     window.addEventListener('keydown', handleEscClose);
   }
 
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true)
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true)
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true)
+  }
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectCard({isOpen: false, card: {}});
+  }
+
   function handleCardClick(card) {
     setSelectCard({isOpen: true, card: card});
     window.addEventListener('keydown', handleEscClose);
